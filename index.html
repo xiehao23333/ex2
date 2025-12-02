@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>悦音 - 您的专属音乐世界</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -11,10 +12,16 @@
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="logo">
-                <span class="logo-icon">♪</span>
+                <span class="logo-icon"><i class="ri-music-line"></i></span>
                 <span class="logo-text">悦音</span>
             </div>
-            <ul class="nav-menu">
+            <button class="menu-toggle" id="menuToggle" aria-label="切换菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="menu-overlay" id="menuOverlay"></div>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="active">首页</a></li>
                 <li><a href="features.html">功能</a></li>
                 <li><a href="pricing.html">价格</a></li>
@@ -49,8 +56,8 @@
             </div>
         </div>
         <div class="carousel-controls">
-            <button class="carousel-btn prev" id="prevBtn">❮</button>
-            <button class="carousel-btn next" id="nextBtn">❯</button>
+            <button class="carousel-btn prev" id="prevBtn"><i class="ri-arrow-left-s-line"></i></button>
+            <button class="carousel-btn next" id="nextBtn"><i class="ri-arrow-right-s-line"></i></button>
         </div>
         <div class="carousel-dots">
             <span class="dot active" data-slide="0"></span>
@@ -65,32 +72,32 @@
             <h2 class="section-title">核心功能</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🎵</div>
+                    <div class="feature-icon"><i class="ri-music-2-fill"></i></div>
                     <h3>海量曲库</h3>
                     <p>千万级正版音乐，覆盖流行、摇滚、古典等多种风格</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
+                    <div class="feature-icon"><i class="ri-brain-line"></i></div>
                     <h3>智能推荐</h3>
                     <p>基于AI的个性化推荐，发现你喜爱的新音乐</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🎧</div>
+                    <div class="feature-icon"><i class="ri-headphone-fill"></i></div>
                     <h3>高品质音质</h3>
                     <p>支持无损音质，带来极致听觉享受</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📱</div>
+                    <div class="feature-icon"><i class="ri-smartphone-line"></i></div>
                     <h3>多平台同步</h3>
                     <p>手机、电脑、平板无缝同步，随时随地享受音乐</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🎤</div>
+                    <div class="feature-icon"><i class="ri-mic-2-fill"></i></div>
                     <h3>音乐社交</h3>
                     <p>分享你的音乐品味，与好友一起听歌</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📻</div>
+                    <div class="feature-icon"><i class="ri-radio-2-line"></i></div>
                     <h3>电台模式</h3>
                     <p>智能电台推荐，让你发现无限可能</p>
                 </div>
@@ -113,11 +120,11 @@
                         <span class="period">/月</span>
                     </div>
                     <ul class="price-features">
-                        <li>✓ 基础音乐播放</li>
-                        <li>✓ 标准音质(128kbps)</li>
-                        <li>✓ 每日推荐30首</li>
-                        <li>✗ 离线下载</li>
-                        <li>✗ 无损音质</li>
+                        <li><i class="ri-check-line"></i> 基础音乐播放</li>
+                        <li><i class="ri-check-line"></i> 标准音质(128kbps)</li>
+                        <li><i class="ri-check-line"></i> 每日推荐30首</li>
+                        <li><i class="ri-close-line"></i> 离线下载</li>
+                        <li><i class="ri-close-line"></i> 无损音质</li>
                     </ul>
                     <button class="btn-price">选择免费版</button>
                 </div>
@@ -132,11 +139,11 @@
                         <span class="period">/月</span>
                     </div>
                     <ul class="price-features">
-                        <li>✓ 海量音乐任听</li>
-                        <li>✓ 高品质音质</li>
-                        <li>✓ 无限推荐</li>
-                        <li>✓ 离线下载100首</li>
-                        <li>✓ 去广告体验</li>
+                        <li><i class="ri-check-line"></i> 海量音乐任听</li>
+                        <li><i class="ri-check-line"></i> 高品质音质</li>
+                        <li><i class="ri-check-line"></i> 无限推荐</li>
+                        <li><i class="ri-check-line"></i> 离线下载100首</li>
+                        <li><i class="ri-check-line"></i> 去广告体验</li>
                     </ul>
                     <button class="btn-price">选择高级版</button>
                 </div>
@@ -150,11 +157,11 @@
                         <span class="period">/月</span>
                     </div>
                     <ul class="price-features">
-                        <li>✓ 全部高级版功能</li>
-                        <li>✓ 无损音质(SQ)</li>
-                        <li>✓ 无限离线下载</li>
-                        <li>✓ 专属客服</li>
-                        <li>✓ 音乐优先体验</li>
+                        <li><i class="ri-check-line"></i> 全部高级版功能</li>
+                        <li><i class="ri-check-line"></i> 无损音质(SQ)</li>
+                        <li><i class="ri-check-line"></i> 无限离线下载</li>
+                        <li><i class="ri-check-line"></i> 专属客服</li>
+                        <li><i class="ri-check-line"></i> 音乐优先体验</li>
                     </ul>
                     <button class="btn-price">选择尊享版</button>
                 </div>
@@ -177,7 +184,9 @@
                     </div>
                     <div class="testimonial-content">
                         <p>"悦音的音质真的太棒了！无损音乐让我重新认识了那些熟悉的歌曲。推荐算法也很精准，每天都能发现好听的新歌。"</p>
-                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
@@ -190,7 +199,9 @@
                     </div>
                     <div class="testimonial-content">
                         <p>"界面设计很清爽，操作流畅。离线下载功能在坐地铁时特别有用，再也不用担心流量问题了！"</p>
-                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
@@ -203,7 +214,9 @@
                     </div>
                     <div class="testimonial-content">
                         <p>"作为免费用户，能享受到这个品质的音乐服务真的很满意。每天30首推荐完全够听了，准备升级高级版试试。"</p>
-                        <div class="rating">⭐⭐⭐⭐☆</div>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-line"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -217,28 +230,28 @@
             <p class="section-subtitle">多平台支持，随时随地享受音乐</p>
             <div class="download-buttons">
                 <button class="download-btn windows">
-                    <span class="download-icon">🪟</span>
+                    <span class="download-icon"><i class="ri-windows-fill"></i></span>
                     <div class="download-info">
                         <span class="download-platform">Windows</span>
                         <span class="download-version">版本 2.5.0</span>
                     </div>
                 </button>
                 <button class="download-btn mac">
-                    <span class="download-icon">💻</span>
+                    <span class="download-icon"><i class="ri-apple-fill"></i></span>
                     <div class="download-info">
                         <span class="download-platform">MacOS</span>
                         <span class="download-version">版本 2.5.0</span>
                     </div>
                 </button>
                 <button class="download-btn ios">
-                    <span class="download-icon">📱</span>
+                    <span class="download-icon"><i class="ri-smartphone-line"></i></span>
                     <div class="download-info">
                         <span class="download-platform">iOS</span>
                         <span class="download-version">版本 2.5.0</span>
                     </div>
                 </button>
                 <button class="download-btn android">
-                    <span class="download-icon">🤖</span>
+                    <span class="download-icon"><i class="ri-android-fill"></i></span>
                     <div class="download-info">
                         <span class="download-platform">Android</span>
                         <span class="download-version">版本 2.5.0</span>

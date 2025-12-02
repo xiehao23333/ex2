@@ -6,10 +6,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     
+    // 检查元素是否存在
+    if (!slides.length || !prevBtn || !nextBtn) {
+        console.warn('轮播图元素未找到');
+        return;
+    }
+    
+    let autoSlideInterval;
+    let isTransitioning = false; // 防止重复切换的标志
+    let lastClickTime = 0; // 记录上次点击时间，用于防抖
+    
     // 自动轮播
     function autoSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        updateCarousel();
+        if (!isTransitioning) {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
     }
     
     // 更新轮播图
@@ -19,32 +31,171 @@ document.addEventListener('DOMContentLoaded', function() {
         dots.forEach(dot => dot.classList.remove('active'));
         
         // 添加当前活动状态
-        slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
+        if (slides[currentSlide]) {
+            slides[currentSlide].classList.add('active');
+        }
+        if (dots[currentSlide]) {
+            dots[currentSlide].classList.add('active');
+        }
     }
     
-    // 手动切换 - 上一张
-    prevBtn.addEventListener('click', function() {
+    // 重置自动轮播计时器
+    function resetAutoSlide() {
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+        }
+        autoSlideInterval = setInterval(autoSlide, 5000);
+    }
+    
+    // 切换上一张（带防抖和防重复机制）
+    function goToPrevSlide() {
+        const now = Date.now();
+        // 防抖：如果距离上次点击少于300ms，则忽略
+        if (now - lastClickTime < 300 || isTransitioning) {
+            return;
+        }
+        
+        isTransitioning = true;
+        lastClickTime = now;
+        
         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
         updateCarousel();
-    });
+        resetAutoSlide();
+        
+        // 300ms后允许下一次切换
+        setTimeout(() => {
+            isTransitioning = false;
+        }, 300);
+    }
     
-    // 手动切换 - 下一张
-    nextBtn.addEventListener('click', function() {
+    // 切换下一张（带防抖和防重复机制）
+    function goToNextSlide() {
+        const now = Date.now();
+        // 防抖：如果距离上次点击少于300ms，则忽略
+        if (now - lastClickTime < 300 || isTransitioning) {
+            return;
+        }
+        
+        isTransitioning = true;
+        lastClickTime = now;
+        
         currentSlide = (currentSlide + 1) % slides.length;
         updateCarousel();
+        resetAutoSlide();
+        
+        // 300ms后允许下一次切换
+        setTimeout(() => {
+            isTransitioning = false;
+        }, 300);
+    }
+    
+    // 手动切换 - 上一张（向左箭头）
+    // 使用click事件，防抖机制已内置在goToPrevSlide函数中
+    prevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        goToPrevSlide();
     });
+    
+    // 触摸设备支持
+    prevBtn.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        goToPrevSlide();
+    }, { passive: false });
+    
+    // 确保按钮始终可交互
+    prevBtn.style.pointerEvents = 'auto';
+    prevBtn.style.zIndex = '11';
+    
+    // 手动切换 - 下一张（向右箭头）
+    // 使用click事件，防抖机制已内置在goToNextSlide函数中
+    nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        goToNextSlide();
+    });
+    
+    // 触摸设备支持
+    nextBtn.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        goToNextSlide();
+    }, { passive: false });
+    
+    // 确保按钮始终可交互
+    nextBtn.style.pointerEvents = 'auto';
+    nextBtn.style.zIndex = '11';
     
     // 点击指示点切换
     dots.forEach((dot, index) => {
         dot.addEventListener('click', function() {
             currentSlide = index;
             updateCarousel();
+            resetAutoSlide(); // 重置自动轮播计时器
         });
     });
     
-    // 自动轮播（每5秒切换一次）
-    setInterval(autoSlide, 5000);
+    // 启动自动轮播（每5秒切换一次）
+    autoSlideInterval = setInterval(autoSlide, 5000);
+    
+    // 移动端菜单切换功能
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    
+    // 关闭菜单的函数（定义在变量之后，确保可以访问）
+    let closeMenu = function() {
+        if (navMenu) {
+            navMenu.classList.remove('active');
+        }
+        if (menuToggle) {
+            menuToggle.classList.remove('active');
+        }
+        if (menuOverlay) {
+            menuOverlay.classList.remove('active');
+        }
+    };
+    
+    if (menuToggle && navMenu) {
+        // 切换菜单显示/隐藏
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isActive = navMenu.classList.contains('active');
+            
+            if (isActive) {
+                closeMenu();
+            } else {
+                navMenu.classList.add('active');
+                menuToggle.classList.add('active');
+                if (menuOverlay) {
+                    menuOverlay.classList.add('active');
+                }
+            }
+        });
+        
+        // 点击遮罩层关闭菜单
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', function() {
+                closeMenu();
+            });
+        }
+        
+        // 点击菜单链接后自动收起菜单
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                closeMenu();
+            });
+        });
+        
+        // 窗口大小改变时，如果切换到桌面视图，关闭移动菜单
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+    }
     
     // 导航栏滚动效果
     const navbar = document.getElementById('navbar');
@@ -97,6 +248,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                // 如果是移动端菜单中的链接，关闭菜单
+                if (navMenu && navMenu.classList.contains('active')) {
+                    closeMenu();
+                }
             }
         });
     });
