@@ -197,24 +197,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 导航栏滚动效果
-    const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
-    
+    // 导航高亮功能（保留，用于滚动时高亮当前区域）
     window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
-        
-        // 添加/移除滚动样式
-        if (currentScroll > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-        
         // 导航高亮
         highlightNavOnScroll();
-        
-        lastScroll = currentScroll;
     });
     
     // 导航滚动高亮功能
