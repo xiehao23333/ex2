@@ -174,6 +174,15 @@
     <section class="pricing" style="padding-top: 0;">
         <div class="container">
             <h2 class="section-title">选择你的方案</h2>
+            <!-- 月付/年付切换开关 -->
+            <div class="pricing-toggle-container">
+                <span class="toggle-label active" id="labelMonthly">按月付费</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="pricingToggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label" id="labelYearly">按年付费 <span class="save-badge">(省 20%)</span></span>
+            </div>
             <div class="pricing-grid">
                 <div class="price-card">
                     <div class="price-header">
@@ -181,8 +190,9 @@
                     </div>
                     <div class="price-amount">
                         <span class="currency">¥</span>
-                        <span class="amount">0</span>
+                        <span class="amount price-value" data-monthly="0" data-yearly="0">0</span>
                         <span class="period">/月</span>
+                        <div class="yearly-equivalent" style="display: none;"></div>
                     </div>
                     <ul class="price-features">
                         <li><i class="ri-check-line"></i> 基础音乐播放</li>
@@ -200,8 +210,9 @@
                     </div>
                     <div class="price-amount">
                         <span class="currency">¥</span>
-                        <span class="amount">18</span>
+                        <span class="amount price-value" data-monthly="18" data-yearly="14.4">18</span>
                         <span class="period">/月</span>
+                        <div class="yearly-equivalent" style="display: none;"></div>
                     </div>
                     <ul class="price-features">
                         <li><i class="ri-check-line"></i> 海量音乐任听</li>
@@ -218,8 +229,9 @@
                     </div>
                     <div class="price-amount">
                         <span class="currency">¥</span>
-                        <span class="amount">30</span>
+                        <span class="amount price-value" data-monthly="30" data-yearly="24">30</span>
                         <span class="period">/月</span>
+                        <div class="yearly-equivalent" style="display: none;"></div>
                     </div>
                     <ul class="price-features">
                         <li><i class="ri-check-line"></i> 全部高级版功能</li>
@@ -229,6 +241,60 @@
                         <li><i class="ri-check-line"></i> 音乐优先体验</li>
                     </ul>
                     <button class="btn-price">选择尊享版</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ 常见问题 -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">常见问题解答</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>如何取消订阅？</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>您可以在账户设置中的"订阅管理"页面随时取消订阅。取消后，您的会员权益将在当前计费周期结束时失效，在此之前仍可正常使用所有功能。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>会员权益是否多端同步？</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>是的，悦音会员支持全平台同步。您的会员权益、音乐收藏、播放列表和听歌进度都会在Windows、Mac、iOS、Android等所有设备间实时同步。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>支持哪些支付方式？</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>我们支持多种支付方式，包括：微信支付、支付宝、银联卡、Apple Pay（iOS设备）、Google Pay（Android设备）等。所有支付均采用加密传输，确保您的支付安全。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>年付会员可以退款吗？</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>年付会员支持7天无理由退款。如果您在购买后7天内申请退款，我们将全额退还您的费用。超过7天后，将按剩余天数比例退款。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>离线下载的音乐可以永久保存吗？</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>离线下载的音乐文件会保存在您的设备本地，只要您保持会员状态，就可以永久访问。如果会员到期，已下载的音乐将无法播放，需要重新订阅才能继续使用。</p>
+                    </div>
                 </div>
             </div>
         </div>
